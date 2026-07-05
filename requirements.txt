@@ -1,6 +1,6 @@
 fastapi==0.110.2
 uvicorn[standard]==0.27.0
-sqlalchemy[asyncio]==2.0.30
+sqlalchemy==2.0.30
 asyncpg==0.29.0
 psycopg2-binary==2.9.10
 python-jose[cryptography]==3.3.0

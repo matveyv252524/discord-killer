@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация — Discord‑Clone</title>
+    <style>
+        body { background:#2f3136; color:#fff; font-family:Arial,Helvetica,sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; }
+        .box { background:#36393f; padding:20px; border-radius:8px; width:340px; }
+        input { width:100%; padding:8px; margin:6px 0; background:#202225; border:none; color:#fff; border-radius:4px; }
+        button { width:100%; padding:10px; background:#5865f2; border:none; color:#fff; border-radius:4px; cursor:pointer; }
+        a { color:#00b0f4; display:block; text-align:center; margin-top:10px; }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h2>Регистрация</h2>
+    <input id="email" placeholder="Э‑mail">
+    <input id="username" placeholder="Имя пользователя">
+    <input id="password" type="password" placeholder="Пароль">
+    <input id="confirm" type="password" placeholder="Подтверждение пароля">
+    <button onclick="register()">Зарегистрироваться</button>
+    <a href="login.html">Уже есть аккаунт?</a>
+</div>
+<script>
+async function register(){
+    const email=document.getElementById('email').value.trim();
+    const username=document.getElementById('username').value.trim();
+    const password=document.getElementById('password').value;
+    const confirm=document.getElementById('confirm').value;
+    if(password!==confirm){alert('Пароли не совпадают');return;}
+    const resp=await fetch('/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,username,password})});
+    if(!resp.ok){alert('Ошибка регистрации');return;}
+    const data=await resp.json();
+    localStorage.setItem('token',data.access_token);
+    window.location.href='index.html';
+}
+</script>
+</body>
+</html>

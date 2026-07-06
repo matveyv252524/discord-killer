@@ -23,7 +23,11 @@
 async function login(){
     const username=document.getElementById('username').value.trim();
     const password=document.getElementById('password').value;
-    const resp=await fetch('/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});
+    const resp=await fetch('/login',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({username,password})
+    });
     if(!resp.ok){alert('Ошибка входа');return;}
     const data=await resp.json();
     localStorage.setItem('token',data.access_token);

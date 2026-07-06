@@ -49,7 +49,10 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 app = FastAPI()
 
+# Serve static frontend at root
+from fastapi.staticfiles import StaticFiles
 app.mount("/", StaticFiles(directory="frontend", html=True), name="static")
+
 
 # -------------------------------------------------------------
 # 3. Pydantic Schemas
